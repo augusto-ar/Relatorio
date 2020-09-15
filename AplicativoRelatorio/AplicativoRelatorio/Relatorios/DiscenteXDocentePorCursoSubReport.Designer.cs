@@ -38,8 +38,9 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.parametro = new DevExpress.XtraReports.Parameters.Parameter();
+            this.curso = new DevExpress.XtraReports.Parameters.Parameter();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -124,17 +125,24 @@
             this.xrTableCell4.TextFormatString = "{0:n2}";
             this.xrTableCell4.Weight = 1D;
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(AplicativoRelatorio.Model.DocenteModel);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // parametro
             // 
             this.parametro.Description = "parametro";
             this.parametro.Name = "parametro";
             this.parametro.Type = typeof(int);
             this.parametro.ValueInfo = "0";
+            // 
+            // curso
+            // 
+            this.curso.Description = "curso";
+            this.curso.Name = "curso";
+            this.curso.Type = typeof(int);
+            this.curso.ValueInfo = "0";
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(AplicativoRelatorio.Model.DocenteModel);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // DiscenteXDocentePorCursoSubReport
             // 
@@ -145,14 +153,15 @@
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
-            this.FilterString = "[IdProfessor] = ?parametro";
+            this.FilterString = "[IdProfessor] = ?parametro And [IdProfessor] = ?curso";
             this.Font = new System.Drawing.Font("Arial", 9.75F);
             this.Margins = new System.Drawing.Printing.Margins(100, 100, 5, 7);
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
-            this.parametro});
+            this.parametro,
+            this.curso});
             this.Version = "20.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
@@ -173,5 +182,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
         private DevExpress.XtraReports.Parameters.Parameter parametro;
+        private DevExpress.XtraReports.Parameters.Parameter curso;
     }
 }

@@ -191,5 +191,4 @@ C:\Users\QG\Documents\GitHub\Relatorio\AplicativoRelatorio\AplicativoRelatorio\b
 C:\Users\QG\Documents\GitHub\Relatorio\AplicativoRelatorio\AplicativoRelatorio\obj\Debug\AplicativoRelatorio.Relatorios.DiscenteXDocentePorCurso.resources
 C:\Users\QG\Documents\GitHub\Relatorio\AplicativoRelatorio\AplicativoRelatorio\obj\Debug\AplicativoRelatorio.Relatorios.DiscenteXDocentePorCursoSubReport.resources
 C:\Users\QG\Documents\GitHub\Relatorio\AplicativoRelatorio\AplicativoRelatorio\obj\Debug\AplicativoRelatorio.exe.licenses
-C:\Users\QG\Documents\GitHub\Relatorio\AplicativoRelatorio\AplicativoRelatorio\obj\Debug\AplicativoRelatorio.csprojAssemblyReference.cache
 C:\Users\QG\Documents\GitHub\Relatorio\AplicativoRelatorio\AplicativoRelatorio\obj\Debug\AplicativoRelatorio.Relatorios.GerencialNotasDirecao.resources

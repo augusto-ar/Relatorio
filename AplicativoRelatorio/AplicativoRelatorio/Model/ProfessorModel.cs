@@ -11,5 +11,6 @@ namespace AplicativoRelatorio.Model
         public string Nome { get; set; }
         public int IdProfessor { get; set; }
         public double Media { get; set; }
+        public int IdCurso { get; set; }
     }
 }

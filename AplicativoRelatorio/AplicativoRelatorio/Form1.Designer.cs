@@ -1,4 +1,6 @@
-﻿namespace AplicativoRelatorio
+﻿using AplicativoRelatorio.Type;
+
+namespace AplicativoRelatorio
 {
     partial class Form1
     {
@@ -39,6 +41,9 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(392, 21);
             this.comboBox1.TabIndex = 0;
+            this.comboBox1.DataSource = RelatorioType.DataSourceFromEnum<RelatorioType.TipoRelatorio>();
+            this.comboBox1.DisplayMember = "Value";
+            this.comboBox1.ValueMember = "Key";
             // 
             // btnGeraRelatorio
             // 

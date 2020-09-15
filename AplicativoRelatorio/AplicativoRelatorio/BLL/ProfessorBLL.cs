@@ -26,7 +26,7 @@ namespace AplicativoRelatorio.BLL
         {
             try
             {
-                var report = MontarRelatorioProfessor();
+                var report = MontaRelatorioDocente();
                 string reportPath = @"C:\Users\QG\Desktop\Test.pdf";
                 report.ExportToPdf(reportPath);
 
@@ -50,7 +50,7 @@ namespace AplicativoRelatorio.BLL
 
                 SqlDataReader dr;
 
-                dr = new DicenteXDocenteRepositorio().DadosRelatorioDicenteXdocente();
+                dr = new ProfessorRepositorio().DadosRelatorioDicenteXdocente();
                 dr.Read();
 
                 while (dr.Read())
@@ -58,11 +58,13 @@ namespace AplicativoRelatorio.BLL
                     lista.Add(new DocenteModel
                     {
                         NomeProfessor = dr.GetString(0).Trim(),
-                        DescricaoQuestao = dr.GetString(1).Trim(),
-                        MediaQuestao = dr.GetDouble(2),
-                        MediaQuestaoDiciplina = dr.GetDouble(3),
-                        MediaDocente = dr.GetDouble(4),
-                        IdProfessor = dr.GetInt32(5)
+                        DescricaoDisciplina = dr.GetString(1).Trim(),
+                        DescricaoQuestao = dr.GetString(2).Trim(),
+                        MediaDocente = dr.GetDouble(3),
+                        MediaQuestaoDiciplina = dr.GetDouble(4),
+                        MediaQuestao = dr.GetDouble(5),
+                        IdProfessor = dr.GetInt32(6),
+                        IdCurso = dr.GetInt32(7)
                     });
                 }
                 return lista;
@@ -76,12 +78,34 @@ namespace AplicativoRelatorio.BLL
         public List<ProfessorModel> ListaProfessor()
         {
             List<ProfessorModel> lista = new List<ProfessorModel>();
+
+            SqlDataReader dr;
+
+            dr = new ProfessorRepositorio().ListaProfessor();
+            dr.Read();
+
+            while (dr.Read())
+            {
+                lista.Add(new ProfessorModel
+                {
+                    IdProfessor = dr.GetInt32(0),
+                    Nome = dr.GetString(1).Trim(),
+                   
+                });
+            }
+            return lista;
+        }
+
+
+        public List<ProfessorModel> ListaGerencialNotasDirecao()
+        {
+            List<ProfessorModel> lista = new List<ProfessorModel>();
             try
             {
 
                 SqlDataReader dr;
 
-                dr = new DicenteXDocenteRepositorio().DadosRelatorioProfessor();
+                dr = new ProfessorRepositorio().DadosRelatorioProfessor();
                 dr.Read();
 
                 while (dr.Read())
@@ -99,21 +123,23 @@ namespace AplicativoRelatorio.BLL
                 return null;
             }
         }
-        private XtraReport MontaRelatorio()
+        private XtraReport MontaRelatorioDocente()
         {
             var dados = ListaDicenteXdocente();
            
-            var professor = dados.Select(x => new ProfessorModel
+            var professor = dados.Select(x => new
             {
-                IdProfessor = x.IdProfessor,
-                Nome = x.NomeProfessor
+                x.IdProfessor,
+                Nome = x.NomeProfessor,
+                Disciplina = x.DescricaoDisciplina,
+                 x.IdCurso,
             }).Distinct().ToList();
 
             var report = new DiscenteXDocentePorCurso();
             var subReport = new DiscenteXDocentePorCursoSubReport();
             subReport.DataSource = new ObjectDataSource { DataSource = dados};
             report.DataSource = new ObjectDataSource { DataSource = professor };
-           
+            ((XRSubreport)report.FindControl("xrSubreport1", true)).ReportSource = subReport;
             return report;
         }
 
