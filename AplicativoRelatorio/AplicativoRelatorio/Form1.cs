@@ -16,19 +16,15 @@ namespace AplicativoRelatorio
     {
         public Form1()
         {          
-            InitializeComponent();
-            //this.comboBox1.DataSource = a;
+            InitializeComponent();          
         }
 
         public void GeraRelatorio(object sender, System.EventArgs e)
         {
             string msg = "";
-            var item = this.comboBox1.SelectedItem;
-            msg =   new ProfessorBLL().ExportaRelatorio();
-
+            var item = this.comboBox1.SelectedValue;
+            RelatorioType.TipoRelatorio tipo = (RelatorioType.TipoRelatorio)item;
             MessageBox.Show(msg);
-
-
 
         }
     }

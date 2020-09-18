@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AplicativoRelatorio.BLL
+namespace AplicativoRelatorio.Contrroller
 {
-   public class QuestaoBLL
+    public class MontarRelatorio
     {
     }
 }

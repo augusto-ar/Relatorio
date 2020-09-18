@@ -66,11 +66,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\CursoBLL.cs" />
-    <Compile Include="BLL\DisciplinaBLL.cs" />
-    <Compile Include="BLL\ProfessorBLL.cs" />
-    <Compile Include="BLL\QuestaoBLL.cs" />
+    <Compile Include="BLL\GerarDadosRelatorioBLL.cs" />
     <Compile Include="Conexao\Conexao.cs" />
+    <Compile Include="Contrroller\ExportarRelatorio.cs" />
+    <Compile Include="Contrroller\MontarRelatorio.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,10 +98,7 @@
     <Compile Include="Relatorios\GerencialNotasDirecao.Designer.cs">
       <DependentUpon>GerencialNotasDirecao.cs</DependentUpon>
     </Compile>
-    <Compile Include="Repositorio\CursoRepositorio.cs" />
-    <Compile Include="Repositorio\DisciplinaRepositorio.cs" />
-    <Compile Include="Repositorio\ProfessorRepositorio.cs" />
-    <Compile Include="Repositorio\QuestaoRepositorio.cs" />
+    <Compile Include="Repositorio\Consultas.cs" />
     <Compile Include="Type\RelatorioType.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -141,9 +137,7 @@
   <ItemGroup>
     <None Include="Resources\logo.JPG" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contrroller\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
