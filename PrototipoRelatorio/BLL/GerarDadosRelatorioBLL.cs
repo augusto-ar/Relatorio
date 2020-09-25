@@ -74,7 +74,8 @@ namespace PrototipoRelatorio.BLL
                                    disciplina.nome as disciplina,
                                  disciplina.codigo,
                                 curso.id, 
-                                professor.id
+                                professor.id,
+                                curso.nome
                                 FROM media_questao_disc_prof
                                 JOIN questao on questao.id = id_questao
                                 JOIN professor on professor.id = id_professor
@@ -94,7 +95,8 @@ namespace PrototipoRelatorio.BLL
                         DescricaoDisciplina = dr.GetString(1).Trim(),                       
                         IdDisciplina = dr.GetString(2),
                         IdCurso = dr.GetInt32(3),
-                        IdProfessor = dr.GetInt32(4)
+                        IdProfessor = dr.GetInt32(4),
+                        DescricaoCurso = dr.GetString(5).Trim(),
                     });
                 }
                 return lista;

@@ -17,5 +17,6 @@ namespace PrototipoRelatorio.Model
         public double MediaQuestao { get; set; }
         public double MediaQuestaoDiciplina { get; set; }
         public double MediaDocente { get; set; }
+        public string DescricaoCurso { get; set; }
     }
 }

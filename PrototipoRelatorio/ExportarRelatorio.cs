@@ -52,25 +52,29 @@ namespace PrototipoRelatorio
                 {
                     dataSourceSubReport =   new GerarDadosRelatorioBLL().ListaDicenteXdocenteSubReport();
                     reportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(SubRelatorioDocentePorCurso);
+
+                    return ExportarDocentePorCurso(reportViewer);
                 }
-
-                string path = @"c:\RelatorioDocentes";
-                string path2 = path;
-
-                if (Directory.Exists(path))
-                    path += @"\" + tipo.ToString() + ".pdf";
                 else
                 {
-                    Directory.CreateDirectory(path);
-                    path += @"\" + tipo.ToString() + ".pdf";
-                }
-                    
+                    string path = @"c:\RelatorioDocentes";
+                    string path2 = path;
 
-                var dataSource = montar.DataSource(tipo);
-                reportViewer.LocalReport.DataSources.Add(dataSource);
-                var bytes = reportViewer.LocalReport.Render("pdf");
-                System.IO.File.WriteAllBytes(path, bytes);
-                return "relatorio criado em "+ path2;
+                    if (Directory.Exists(path))
+                        path += @"\" + tipo.ToString() + ".pdf";
+                    else
+                    {
+                        Directory.CreateDirectory(path);
+                        path += @"\" + tipo.ToString() + ".pdf";
+                    }
+
+
+                    var dataSource = montar.DataSource(tipo);
+                    reportViewer.LocalReport.DataSources.Add(dataSource);
+                    var bytes = reportViewer.LocalReport.Render("pdf");
+                    System.IO.File.WriteAllBytes(path, bytes);
+                    return "relatorio criado em " + path2;
+                }               
 
             }
             catch (Exception e)
@@ -107,6 +111,58 @@ namespace PrototipoRelatorio
                     return "";
 
             }
+        }
+
+        private string ExportarDocentePorCurso(ReportViewer report)
+        {
+            string path = @"c:\RelatorioDiscenteXDocentes";
+           
+           
+            var dataSource = new GerarDadosRelatorioBLL().ListaDocenteXdocenteMasterReport();
+            if (!Directory.Exists(path))
+            {               
+                Directory.CreateDirectory(path);
+            }            
+
+            foreach (var item in dataSource)
+            {
+                IList<object> obj = new List<object>();
+                obj.Add( new {
+                    IdCurso = item.IdCurso,
+                    IdProfessor = item.IdProfessor,
+                    IdDisciplina = item.IdDisciplina,
+                    NomeProfessor = item.NomeProfessor,
+                    DescricaoDisciplina = item.DescricaoDisciplina
+                });
+
+                var curso = item.DescricaoCurso.Replace(':', ' ').
+                                                Replace('|', ' ').
+                                                Replace('?', ' ').
+                                                Replace('<', ' ').
+                                                Replace('>', ' ').
+                                                Replace('*', ' ').
+                                                Replace(':', ' ').
+                                                Replace('“', ' ');
+
+                var disciplina = item.DescricaoDisciplina.Replace(':', ' ').
+                                                            Replace('|', ' ').
+                                                            Replace('?', ' ').
+                                                            Replace('<', ' ').
+                                                            Replace('>', ' ').
+                                                            Replace('*', ' ').
+                                                            Replace(':', ' ').
+                                                            Replace('“', ' ');
+
+                var pathAux = path + @"\" + item.NomeProfessor + "-" + curso + "-" + disciplina + ".pdf";
+                var source = new ReportDataSource(RelatorioType.TipoRelatorio.DocentePorCurso.ToString(), obj);
+                report.LocalReport.DataSources.Add(source);
+                var bytes = report.LocalReport.Render("pdf");
+                System.IO.File.WriteAllBytes(pathAux, bytes);
+            }
+
+            return path;
+
+
         }
     }
 }
