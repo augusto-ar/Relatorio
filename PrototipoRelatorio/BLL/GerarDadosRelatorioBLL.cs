@@ -23,23 +23,25 @@ namespace PrototipoRelatorio.BLL
         /// <returns></returns>
         public object ListaDicenteXdocenteSubReport()
         {
-            List<DocenteXdocenteModelSubReportModel> lista = new List<DocenteXdocenteModelSubReportModel>();
-            string query = @"SELECT professor.nome as professor, 
-                                    disciplina.nome as disciplina,
-                                    questao.texto as questão,   
-                                    media_questao_disc_prof.media as mediaDocente, 
-                                    media_questao_curso.media as media_curso,
-                                    questao.media as media_geral, 
-                                    disciplina.codigo,
-                                    curso.id, 
-                                    professor.id
+            List<DocenteXdocenteModelSubReportModel> lista = new List<DocenteXdocenteModelSubReportModel>();         
+
+            string query = @"SELECT professor.nome, 
+                                            disciplina.nome,
+                                            questao.texto, 
+                                            media_questao_disc_prof.media, 
+                                            media_questao_curso.media as media_curso, 
+                                            questao.media as media_geral,
+                                            disciplina.codigo,
+                                            curso.id, 
+                                            professor.id
                                             FROM media_questao_disc_prof
-                                            JOIN questao on questao.id = id_questao
-                                            JOIN professor on professor.id = id_professor
-                                            JOIN disciplina on disciplina.codigo = cod_disc
-                                            JOIN curso on disciplina.id_curso = curso.id
-                                            JOIN media_questao_curso on curso.id = media_questao_curso.id_curso
-                                            AND questao.id= media_questao_curso.id_questao";
+                                            join questao on questao.id = id_questao
+                                            join professor on professor.id = id_professor
+                                            join disciplina on disciplina.codigo = cod_disc
+                                            join curso on disciplina.id_curso = curso.id
+                                            join media_questao_curso on curso.id = media_questao_curso.id_curso
+                                            and questao.id= media_questao_curso.id_questao
+                                            ORDER BY professor.id,disciplina.codigo, questao.id";
 
             try
             {

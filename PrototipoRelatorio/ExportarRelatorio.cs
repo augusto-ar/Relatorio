@@ -142,7 +142,8 @@ namespace PrototipoRelatorio
                                                 Replace('>', ' ').
                                                 Replace('*', ' ').
                                                 Replace(':', ' ').
-                                                Replace('“', ' ');
+                                                Replace('“', ' ').
+                                                Replace('/', '-');
 
                 var disciplina = item.DescricaoDisciplina.Replace(':', ' ').
                                                             Replace('|', ' ').
@@ -151,7 +152,8 @@ namespace PrototipoRelatorio
                                                             Replace('>', ' ').
                                                             Replace('*', ' ').
                                                             Replace(':', ' ').
-                                                            Replace('“', ' ');
+                                                            Replace('“', ' ').
+                                                            Replace('/','-');
 
                 var pathAux = path + @"\" + item.NomeProfessor + "-" + curso + "-" + disciplina + ".pdf";
                 var source = new ReportDataSource(RelatorioType.TipoRelatorio.DocentePorCurso.ToString(), obj);
