@@ -53,7 +53,7 @@ namespace PrototipoRelatorio
                     dataSourceSubReport =   new GerarDadosRelatorioBLL().ListaDicenteXdocenteSubReport();
                     reportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(SubRelatorioDocentePorCurso);
 
-                    return ExportarDocentePorCurso(reportViewer);
+                    return "Relatório criados no diretorio: " + ExportarDocentePorCurso(reportViewer);
                 }
                 else
                 {
@@ -73,7 +73,7 @@ namespace PrototipoRelatorio
                     reportViewer.LocalReport.DataSources.Add(dataSource);
                     var bytes = reportViewer.LocalReport.Render("pdf");
                     System.IO.File.WriteAllBytes(path, bytes);
-                    return "relatorio criado em " + path2;
+                    return "Relatório criados no diretorio: " + path2;
                 }               
 
             }
@@ -159,7 +159,8 @@ namespace PrototipoRelatorio
                 var source = new ReportDataSource(RelatorioType.TipoRelatorio.DocentePorCurso.ToString(), obj);
                 report.LocalReport.DataSources.Add(source);
                 var bytes = report.LocalReport.Render("pdf");
-                System.IO.File.WriteAllBytes(pathAux, bytes);
+                File.WriteAllBytes(pathAux, bytes);
+                report.LocalReport.DataSources.Clear();
             }
 
             return path;
